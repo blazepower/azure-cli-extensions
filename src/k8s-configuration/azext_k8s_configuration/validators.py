@@ -106,8 +106,8 @@ def validate_azure_blob_auth(azure_blob):
 
         if sp.client_secret and sp.client_certificate:
             raise MutuallyExclusiveArgumentError(
-            consts.REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_ERROR,
-            consts.REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_HELP,
+                consts.REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_ERROR,
+                consts.REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_HELP,
             )
 
         if sp.client_certificate_password and not sp.client_certificate:
