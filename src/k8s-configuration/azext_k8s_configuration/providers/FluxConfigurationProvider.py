@@ -975,7 +975,7 @@ class GitRepositoryGenerator(SourceKindGenerator):
                 config.source_kind = SourceKindType.GIT_REPOSITORY
 
                 config.bucket = BucketPatchDefinition()
-                config.azureBlob = AzureBlobPatchDefinition()
+                config.azure_blob = AzureBlobPatchDefinition()
             return config
 
         return git_repository_updater
@@ -1128,7 +1128,7 @@ class AzureBlobGenerator(SourceKindGenerator):
         self.validate()
 
         def azure_blob_updater(config):
-            config.azureBlob = AzureBlobDefinition(
+            config.azure_blob = AzureBlobDefinition(
                 url=self.url,
                 container_name=self.container_name,
                 timeout_in_seconds=parse_duration(self.timeout),
@@ -1153,7 +1153,7 @@ class AzureBlobGenerator(SourceKindGenerator):
 
         def azure_blob_patch_updater(config):
             if any(kwarg is not None for kwarg in self.kwargs.values()):
-                config.bucket = AzureBlobPatchDefinition(
+                config.azure_blob = AzureBlobPatchDefinition(
                     url=self.url,
                     container_name=self.container_name,
                     timeout_in_seconds=parse_duration(self.timeout),
