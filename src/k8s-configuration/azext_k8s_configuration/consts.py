@@ -42,13 +42,13 @@ REQUIRED_BUCKET_VALUES_MISSING_HELP = (
     "Provide either both of '--secret-key' and '--access-key' or '--local-auth-ref'"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_VALUES_MISSING_ERROR = (
-    "Error! Service principal is invalid"
+    "Error! Service principal is invalid because it is missing value(s)"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_VALUES_MISSING_HELP = (
     "Provide '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-certificate'"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_ERROR = (
-    "Error! Too many authentication methods for Service principal"
+    "Error! Too many authentication methods for service principal"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_HELP = (
     "Provide only one of '--sp-client-secret' or '--sp-client-certificate'"
@@ -63,7 +63,7 @@ REQUIRED_AZURE_BLOB_AUTH_ERROR = (
     "Error! Too many authentication methods for Azure Blob"
 )
 REQUIRED_AZURE_BLOB_AUTH_HELP = (
-    "Specify one authentication method of '--local-auth-ref', '--account-key', '--mi-client-id', or service principal"
+    "Specify one authentication method of '--local-auth-ref', '--account-key', '--mi-client-id', or service principal with '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-certificate'"
 )
 EXTRA_VALUES_PROVIDED_ERROR = (
     "Error! Invalid properties [{}] were specified for kind '{}'"
