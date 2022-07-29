@@ -119,7 +119,6 @@ def validate_azure_blob_auth(azure_blob):
     auth_count = 0
     for auth in [
         azure_blob.service_principal,
-        azure_blob.sas_token,
         azure_blob.account_key,
         azure_blob.local_auth_ref,
         azure_blob.managed_identity
