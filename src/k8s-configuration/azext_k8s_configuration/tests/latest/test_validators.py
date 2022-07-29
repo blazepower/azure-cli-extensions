@@ -125,7 +125,7 @@ class TestValidateAzureBlobAuth(unittest.TestCase):
     def test_missing_client_id_service_principal(self):
         sp = ServicePrincipal("tenantid",None,"mysecret")
         azblob = AzureBlob(sp)
-        err = 'Error! Service principal is invalid'
+        err = 'Error! Service principal is invalid because it is missing value(s)'
         with self.assertRaises(RequiredArgumentMissingError) as cm:
             validate_azure_blob_auth(azblob)
         self.assertEqual(str(cm.exception), err)
@@ -133,7 +133,7 @@ class TestValidateAzureBlobAuth(unittest.TestCase):
     def test_missing_secret_service_principal(self):
         sp = ServicePrincipal("tenantid","clientid")
         azblob = AzureBlob(sp)
-        err = 'Error! Service principal is invalid'
+        err = 'Error! Service principal is invalid because it is missing value(s)'
         with self.assertRaises(RequiredArgumentMissingError) as cm:
             validate_azure_blob_auth(azblob)
         self.assertEqual(str(cm.exception), err)
@@ -141,7 +141,7 @@ class TestValidateAzureBlobAuth(unittest.TestCase):
     def test_too_many_auth_service_principal(self):
         sp = ServicePrincipal("tenantid","clientid","mysecret","mycert")
         azblob = AzureBlob(sp)
-        err = 'Error! Too many authentication methods for Service principal'
+        err = 'Error! Too many authentication methods for service principal'
         with self.assertRaises(MutuallyExclusiveArgumentError) as cm:
             validate_azure_blob_auth(azblob)
         self.assertEqual(str(cm.exception), err)
