@@ -163,7 +163,6 @@ def create_config(
     sp_client_secret=None,
     sp_client_cert_send_chain=False,
     account_key=None,
-    sas_token=None,
     mi_client_id=None,
 ):
 
@@ -201,7 +200,6 @@ def create_config(
         sp_client_cert_password=sp_client_cert_password,
         sp_client_secret=sp_client_secret,
         sp_client_cert_send_chain=sp_client_cert_send_chain,
-        sas_token=sas_token,
         mi_client_id=mi_client_id,
     )
 
@@ -296,7 +294,6 @@ def update_config(
     sp_client_secret=None,
     sp_client_cert_send_chain=False,
     account_key=None,
-    sas_token=None,
     mi_client_id=None,
 ):
 
@@ -339,7 +336,6 @@ def update_config(
         sp_client_cert_password=sp_client_cert_password,
         sp_client_secret=sp_client_secret,
         sp_client_cert_send_chain=sp_client_cert_send_chain,
-        sas_token=sas_token,
         mi_client_id=mi_client_id,
     )
 
@@ -1082,7 +1078,6 @@ class AzureBlobGenerator(SourceKindGenerator):
         self.timeout = kwargs.get("timeout")
         self.sync_interval = kwargs.get("sync_interval")
         self.account_key = kwargs.get("account_key")
-        self.sas_token = kwargs.get("sas_token")
         self.local_auth_ref = kwargs.get("local_auth_ref")
 
         self.service_principal = None
@@ -1134,7 +1129,6 @@ class AzureBlobGenerator(SourceKindGenerator):
                 timeout_in_seconds=parse_duration(self.timeout),
                 sync_interval_in_seconds=parse_duration(self.sync_interval),
                 account_key=self.account_key,
-                sas_token=self.sas_token,
                 service_principal=self.service_principal,
                 managed_identity=self.managed_identity,
                 local_auth_ref=self.local_auth_ref,
