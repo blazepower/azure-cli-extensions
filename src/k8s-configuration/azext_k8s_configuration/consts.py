@@ -45,25 +45,25 @@ REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_VALUES_MISSING_ERROR = (
     "Error! Service principal is invalid because it is missing value(s)"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_VALUES_MISSING_HELP = (
-    "Provide '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-certificate'"
+    "Provide '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-cert'"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_ERROR = (
     "Error! Too many authentication methods for service principal"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_HELP = (
-    "Provide only one of '--sp-client-secret' or '--sp-client-certificate'"
+    "Provide only one of '--sp-client-secret' or '--sp-client-cert'"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_CERT_VALUES_MISSING_ERROR = (
     "Error! Service principal certificate password is invalid"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_CERT_VALUES_MISSING_HELP = (
-    "Provide '--sp-client-id', '--sp-tenant-id', and '--sp-client-cert' with your '--sp-client-cert-password"
+    "Provide '--sp-client-id', '--sp-tenant-id', and '--sp-client-cert' with your '--sp-cert-password"
 )
 REQUIRED_AZURE_BLOB_AUTH_ERROR = (
     "Error! Too many authentication methods for Azure Blob"
 )
 REQUIRED_AZURE_BLOB_AUTH_HELP = (
-    "Specify one authentication method of '--local-auth-ref', '--account-key', '--mi-client-id', or service principal with '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-certificate'"
+    "Specify one authentication method of '--local-auth-ref', '--account-key', '--mi-client-id', or service principal with '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-cert'"
 )
 EXTRA_VALUES_PROVIDED_ERROR = (
     "Error! Invalid properties [{}] were specified for kind '{}'"

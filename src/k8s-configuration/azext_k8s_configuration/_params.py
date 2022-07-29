@@ -204,13 +204,13 @@ def load_arguments(self, _):
         c.argument(
             "sp_client_cert_password",
             arg_group="Azure Blob Auth",
-            options_list=["--sp-client-cert-password", "--service-principal-client-certificate-password"],
+            options_list=["--sp-cert-password", "--service-principal-client-certificate-password"],
             help="The password for the client certificate used to authenticate a service principal with Azure Blob",
         )
         c.argument(
-            "sp_client_cert-send-chain",
+            "sp_client_cert_send_chain",
             arg_group="Azure Blob Auth",
-            options_list=["--sp-client-cert-send-chain", "--service-principal-client-certificate-send-chain"],
+            options_list=["--sp-cert-send-chain", "--service-principal-client-certificate-send-chain"],
             help="Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the client certificate",
         )
         c.argument(
