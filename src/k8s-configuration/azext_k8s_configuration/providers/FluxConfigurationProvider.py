@@ -1111,7 +1111,7 @@ class AzureBlobGenerator(SourceKindGenerator):
                 kwargs.get("mi_client_id"),
             ]
         ):
-            self.service_principal = ManagedIdentityDefinition(
+            self.managed_identity = ManagedIdentityDefinition(
                 client_id=kwargs.get("mi_client_id"),
             )
 
