@@ -68,11 +68,11 @@ from ..vendored_sdks.v2022_07_01.models import Extension, Identity
 logger = get_logger(__name__)
 
 
-def show_config(cmd, client, resource_group_name, cluster_type, cluster_name, name):
+def show_config(cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=None):
     """Get an existing Kubernetes Source Control Configuration."""
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
     try:
         config = client.get(
@@ -113,9 +113,9 @@ def show_config(cmd, client, resource_group_name, cluster_type, cluster_name, na
         raise ex
 
 
-def list_configs(cmd, client, resource_group_name, cluster_type, cluster_name):
+def list_configs(cmd, client, resource_group_name, cluster_type, cluster_name, cluster_resource_provider=None):
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     return client.list(resource_group_name, cluster_rp, cluster_type, cluster_name)
@@ -164,10 +164,11 @@ def create_config(
     sp_client_cert_send_chain=False,
     account_key=None,
     mi_client_id=None,
+    cluster_resource_provider=None,
 ):
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     factory = source_kind_generator_factory(
@@ -295,14 +296,15 @@ def update_config(
     sp_client_cert_send_chain=False,
     account_key=None,
     mi_client_id=None,
+    cluster_resource_provider=None,
 ):
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     if not kind:
         kind = convert_to_cli_source_kind(config.source_kind)
@@ -405,10 +407,11 @@ def create_kustomization(
     prune=None,
     force=None,
     no_wait=False,
+    cluster_resource_provider=None,
 ):
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     # Pre-Validation
@@ -417,7 +420,7 @@ def create_kustomization(
     validate_duration("--retry-interval", retry_interval)
 
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     if kustomization_name in current_config.kustomizations:
         raise ValidationError(
@@ -465,10 +468,11 @@ def update_kustomization(
     prune=None,
     force=None,
     no_wait=False,
+    cluster_resource_provider=None,
 ):
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     # Pre-Validation
@@ -477,7 +481,7 @@ def update_kustomization(
     validate_duration("--retry-interval", retry_interval)
 
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     if kustomization_name not in current_config.kustomizations:
         raise ValidationError(
@@ -519,17 +523,18 @@ def delete_kustomization(
     kustomization_name,
     no_wait=False,
     yes=False,
+    cluster_resource_provider=None,
 ):
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     # Confirmation message for deletes
     user_confirmation_factory(cmd, yes)
 
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     if kustomization_name not in current_config.kustomizations:
         raise ValidationError(
@@ -560,13 +565,14 @@ def delete_kustomization(
 
 
 def list_kustomization(
-    cmd, client, resource_group_name, cluster_type, cluster_name, name
+    cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=None
 ):
     # Get Resource Provider to call
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     return current_config.kustomizations
 
@@ -579,12 +585,13 @@ def show_kustomization(
     cluster_name,
     name,
     kustomization_name,
+    cluster_resource_provider=None,
 ):
-
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
     if kustomization_name not in current_config.kustomizations:
         raise ValidationError(
@@ -595,11 +602,12 @@ def show_kustomization(
 
 
 def list_deployed_object(
-    cmd, client, resource_group_name, cluster_type, cluster_name, name
+    cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=None
 ):
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_rp
     )
     return current_config.statuses
 
@@ -614,10 +622,12 @@ def show_deployed_object(
     object_name,
     object_namespace,
     object_kind,
+    cluster_resource_provider=None,
 ):
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
     current_config = show_config(
-        cmd, client, resource_group_name, cluster_type, cluster_name, name
+        cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
     )
 
     for status in current_config.statuses:
@@ -645,19 +655,20 @@ def delete_config(
     force=False,
     no_wait=False,
     yes=False,
+    cluster_resource_provider=None,
 ):
 
     # Confirmation message for deletes
     user_confirmation_factory(cmd, yes)
 
     # Get Resource Provider to call
-    cluster_rp, _ = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, _ = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_resource_provider)
     validate_cc_registration(cmd)
 
     config = None
     try:
         config = show_config(
-            cmd, client, resource_group_name, cluster_type, cluster_name, name
+            cmd, client, resource_group_name, cluster_type, cluster_name, name, cluster_resource_provider=cluster_rp
         )
     except HttpResponseError:
         logger.warning(
@@ -779,7 +790,7 @@ def __add_identity(
     if cluster_type.lower() == consts.MANAGED_CLUSTER_TYPE:
         return extension_instance
 
-    cluster_rp, parent_api_version = get_cluster_rp_api_version(cluster_type)
+    cluster_rp, parent_api_version = get_cluster_rp_api_version(cluster_type=cluster_type, cluster_rp=cluster_rp)
 
     cluster_resource_id = (
         "/subscriptions/{0}/resourceGroups/{1}/providers/{2}/{3}/{4}".format(
