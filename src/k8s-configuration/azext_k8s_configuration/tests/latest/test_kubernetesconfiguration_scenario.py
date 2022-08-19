@@ -63,7 +63,7 @@ class K8sConfigurationScenarioTest(ScenarioTest):
                  ])
 
         # Get the configuration created
-        self.cmd('k8s-configuration flux show -g {rg} -c {cluster_name} -n {name} --cluster-type {cluster_type}',
+        self.cmd('k8s-configuration show -g {rg} -c {cluster_name} -n {name} --cluster-type {cluster_type}',
                  checks=[
                      self.check('name', '{name}'),
                      self.check('resourceGroup', '{rg}'),
