@@ -224,6 +224,11 @@ def load_arguments(self, _):
             help="The Azure Blob Shared Key for authentication ",
         )
         c.argument(
+            "sas_token",
+            arg_group="Azure Blob Auth",
+            help="The Azure Blob SAS Token for authentication ",
+        )
+        c.argument(
             "mi_client_id",
             arg_group="Azure Blob Auth",
             options_list=["--mi-client-id", "--managed-identity-client-id"],

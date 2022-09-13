@@ -163,6 +163,7 @@ def create_config(
     sp_client_secret=None,
     sp_client_cert_send_chain=False,
     account_key=None,
+    sas_token=None,
     mi_client_id=None,
     cluster_resource_provider=None,
 ):
@@ -195,6 +196,7 @@ def create_config(
         bucket_insecure=bucket_insecure,
         container_name=container_name,
         account_key=account_key,
+        sas_token=sas_token,
         sp_tenant_id=sp_tenant_id,
         sp_client_id=sp_client_id,
         sp_client_cert=sp_client_cert,
@@ -295,6 +297,7 @@ def update_config(
     sp_client_secret=None,
     sp_client_cert_send_chain=False,
     account_key=None,
+    sas_token=None,
     mi_client_id=None,
     cluster_resource_provider=None,
 ):
@@ -332,6 +335,7 @@ def update_config(
         bucket_insecure=bucket_insecure,
         container_name=container_name,
         account_key=account_key,
+        sas_token=sas_token,
         sp_tenant_id=sp_tenant_id,
         sp_client_id=sp_client_id,
         sp_client_cert=sp_client_cert,
@@ -1089,6 +1093,7 @@ class AzureBlobGenerator(SourceKindGenerator):
         self.timeout = kwargs.get("timeout")
         self.sync_interval = kwargs.get("sync_interval")
         self.account_key = kwargs.get("account_key")
+        self.sas_token = kwargs.get("sas_token")
         self.local_auth_ref = kwargs.get("local_auth_ref")
 
         self.service_principal = None
@@ -1140,6 +1145,7 @@ class AzureBlobGenerator(SourceKindGenerator):
                 timeout_in_seconds=parse_duration(self.timeout),
                 sync_interval_in_seconds=parse_duration(self.sync_interval),
                 account_key=self.account_key,
+                sas_token=self.sas_token,
                 service_principal=self.service_principal,
                 managed_identity=self.managed_identity,
                 local_auth_ref=self.local_auth_ref,
@@ -1164,6 +1170,7 @@ class AzureBlobGenerator(SourceKindGenerator):
                     timeout_in_seconds=parse_duration(self.timeout),
                     sync_interval_in_seconds=parse_duration(self.sync_interval),
                     account_key=self.account_key,
+                    sas_token=self.sas_token,
                     local_auth_ref=self.local_auth_ref,
                     service_principal=self.service_principal,
                     managed_identity=self.managed_identity,
