@@ -63,7 +63,7 @@ REQUIRED_AZURE_BLOB_AUTH_ERROR = (
     "Error! Too many authentication methods for Azure Blob"
 )
 REQUIRED_AZURE_BLOB_AUTH_HELP = (
-    "Specify one authentication method of '--local-auth-ref', '--account-key', '--mi-client-id', or service principal with '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-cert'"
+    "Specify one authentication method of '--local-auth-ref', '--account-key', '--sas-token', '--mi-client-id', or service principal with '--sp-client-id', '--sp-tenant-id', and one of '--sp-client-secret' or '--sp-client-cert'"
 )
 EXTRA_VALUES_PROVIDED_ERROR = (
     "Error! Invalid properties [{}] were specified for kind '{}'"
