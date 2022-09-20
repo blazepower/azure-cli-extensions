@@ -7,4 +7,4 @@ $POD_RUNNING = "Running"
 $SUCCEEDED = "Succeeded"
 $COMPLIANT = "Compliant"
 
-$MAX_RETRY_ATTEMPTS = 24
+$MAX_RETRY_ATTEMPTS = 50
