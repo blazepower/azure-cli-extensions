@@ -1,16 +1,16 @@
-Describe 'Flux Configuration (Azure Blob Storage - Account Key) Testing' {
+Describe 'Flux Configuration (Azure Blob Storage - SAS Token) Testing' {
     BeforeAll {
         . $PSScriptRoot/Constants.ps1
         . $PSScriptRoot/Helper.ps1
 
         $url = "https://fluxblobstorageclitest.blob.core.windows.net/"
         $containerName = "arc-k8s-demo"
-        $accountKey = $(az keyvault secret show --name blobAccountKey --vault-name fluxExtTestingSecrets | jq .value -r)
-        $configurationName = "blob-accountkey-config"
+        $sasToken = $(az keyvault secret show --name blobSasToken --vault-name fluxExtTestingSecrets | jq .value -r)
+        $configurationName = "blob-sas-token-config"
     }
 
-    It 'Creates a configuration with account key on the cluster' {
-        $output = az k8s-configuration flux create -c $ENVCONFIG.arcClusterName -g $ENVCONFIG.resourceGroup --cluster-type "connectedClusters" --kind azblob -u $url -n $configurationName --scope cluster --namespace $configurationName --container-name $containerName --account-key $accountKey --kustomization name=test path=./ prune=true --no-wait
+    It 'Creates a configuration with sas token on the cluster' {
+        $output = az k8s-configuration flux create -c $ENVCONFIG.arcClusterName -g $ENVCONFIG.resourceGroup --cluster-type "connectedClusters" --kind azblob -u $url -n $configurationName --scope cluster --namespace $configurationName --container-name $containerName --sas-token $sasToken --kustomization name=test path=./ prune=true --no-wait
         $? | Should -BeTrue
 
         $n = 0
