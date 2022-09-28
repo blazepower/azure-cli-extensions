@@ -141,7 +141,7 @@ class TestValidateAzureBlobAuth(unittest.TestCase):
     def test_too_many_auth_service_principal(self):
         sp = ServicePrincipal("tenantid","clientid","mysecret","mycert")
         azblob = AzureBlob(sp)
-        err = 'Error! Too many authentication methods for service principal'
+        err = 'Error! Too many authentication methods provided for service principal'
         with self.assertRaises(MutuallyExclusiveArgumentError) as cm:
             validate_azure_blob_auth(azblob)
         self.assertEqual(str(cm.exception), err)
@@ -156,7 +156,7 @@ class TestValidateAzureBlobAuth(unittest.TestCase):
 
     def test_too_many_auth_azure_blob(self):
         azblob = AzureBlob(None,"myaccountkey", "mylocalauthref")
-        err = 'Error! Too many authentication methods for Azure Blob'
+        err = 'Error! Too many authentication methods provided for Azure Blob'
         with self.assertRaises(MutuallyExclusiveArgumentError) as cm:
             validate_azure_blob_auth(azblob)
         self.assertEqual(str(cm.exception), err)
