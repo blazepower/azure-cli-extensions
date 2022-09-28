@@ -48,7 +48,7 @@ REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_VALUES_MISSING_HELP = (
     "Provide '--sp-client-id', '--sp-tenant-id', and either '--sp-client-secret' or '--sp-client-cert'"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_ERROR = (
-    "Error! Too many authentication methods for service principal"
+    "Error! Too many authentication methods provided for service principal"
 )
 REQUIRED_AZURE_BLOB_SERVICE_PRINCIPAL_AUTH_HELP = (
     "Provide either '--sp-client-secret' or '--sp-client-cert'"
