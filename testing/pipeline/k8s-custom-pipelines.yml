@@ -114,7 +114,7 @@ stages:
         displayName: 'Use Python 3.7'
         inputs:
           versionSpec: 3.7
-      - bash: pip install wheel==0.30.0 pylint==1.9.4 flake8==3.5.0 requests
+      - bash: pip install wheel==0.30.0 pylint flake8==3.5.0 requests
         displayName: 'Install wheel, pylint, flake8, requests'
       - bash: python scripts/ci/source_code_static_analysis.py
         displayName: "Static Analysis"
